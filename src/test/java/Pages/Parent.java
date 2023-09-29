@@ -14,6 +14,7 @@ import java.time.Duration;
 public class Parent {
     public WebDriverWait wait = new WebDriverWait(GWD.getDriver(), Duration.ofSeconds(20));
     public JavascriptExecutor js = (JavascriptExecutor) GWD.getDriver();
+    public Actions actions = new Actions(GWD.getDriver());
 
     public void scrollToElement(WebElement element){
         js.executeScript("arguments[0].scrollIntoView();", element);
@@ -22,6 +23,7 @@ public class Parent {
     public void myClick(WebElement element){
         wait.until(ExpectedConditions.elementToBeClickable(element));
         scrollToElement(element);
+        actions.moveToElement(element).build().perform();
         element.click();
     }
 
